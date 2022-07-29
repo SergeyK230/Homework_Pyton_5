@@ -10,53 +10,53 @@
 # 
 # b) Подумайте как наделить бота ""интеллектом""
 
+from random import randint
+from secrets import choice
 
-def VS_Com_Player(candys = 2021):
-    player1 = True
-    while candys > 28:
-        if player1:
-            print('Игрок 1')
-            hod = int(input('Введите количество конфет от 1 до 28 -> '))
-            if 0 < hod < 29:
-                candys -= hod
-                print(candys)
-                player1 = not player1
-            else:
-                print('Неправильный ввод')
-        else:
-            print('Компьютер')
-            grab = candys % 28 - 1
-            if grab == 0:
-                grab = 28
-            elif grab == -1:
-                grab = 27
-            print('Взял -> ', grab)
-            candys -= grab
-            print(candys)
-            player1 = not player1
-    if player1:
-        print('Игрок 1 победил')
-    else:
-        print('Компьютер победил')
-    
-def VS_Humam(candys = 2021):    
-    player1 = True
-    while candys > 28:
-        if player1:
-            print('Игрок 1')
-        else:
-            print('Игрок 2')
+
+def Player(player_number, candys):
+    print('Игрок ',player_number)
+    while True:
         hod = int(input('Введите количество конфет от 1 до 28 -> '))
         if 0 < hod < 29:
-            candys = candys - hod
+            candys -= hod
             print(candys)
-            player1 = not player1
+            break
         else:
             print('Неправильный ввод')
+    return candys
 
-    if player1:
+def Com_Player(candys):
+    print('Компьютер')
+    grab = candys % 29
+    if grab == 0:
+        grab = randint(1,28)
+    print('Взял -> ', grab)
+    candys -= grab
+    print(candys)
+
+    return candys
+
+def Game(player_coll = 1, candys = 2021):
+    player_1 = choice([True, False])
+
+    while candys > 28:
+        if player_1:
+            candys = Player(1, candys)
+            player_1 = not player_1
+        elif player_coll == 2:
+            candys = Player(2,candys)
+            player_1 = not player_1
+        else:
+            candys = Com_Player(candys)
+            player_1 = not player_1
+
+    if player_1:
         print('Игрок 1 победил')
-    else:
+    elif player_coll == 2:
         print('Игрок 2 победил')
+    else:
+        print('Компьютер победил')
 
-VS_Com_Player(200)
+coll = int(input('Введите количество игроков(1 или 2) -> '))
+Game(coll, 88)
