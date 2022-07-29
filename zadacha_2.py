@@ -59,4 +59,4 @@ def Game(player_coll = 1, candys = 2021):
         print('Компьютер победил')
 
 coll = int(input('Введите количество игроков(1 или 2) -> '))
-Game(coll, 88)
+Game(coll, 2021)
