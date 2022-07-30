@@ -26,7 +26,7 @@ def Second_Iterarion_Pack(text1):
     last = -1
     i = 0
     while i < len(text1):
-        if first == -1 and text1[i] != '1': # and text1[i].isdigit() and text1[i] != 1:
+        if first == -1 and text1[i] != '1':
             text2 = text2 + text1[i]
             i += 1
         elif text1[i] == '1' and first == -1:
